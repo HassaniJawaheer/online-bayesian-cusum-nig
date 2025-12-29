@@ -1,10 +1,10 @@
-# Online Bayesian CUSUM (Normal–Inverse-Gamma)
+# **Online Bayesian CUSUM (Normal–Inverse-Gamma)**
 
 A Python project for **online regime-change detection** in a Gaussian stream.
 It uses a **Bayesian CUSUM** score built from **predictive log-likelihoods** under a **Normal–Inverse-Gamma (NIG)** conjugate model.
 The repo also includes a **Gaussian changepoint simulator** and a **threshold calibration** script (ARL0-based).
 
-## Quick start
+## **Quick start**
 
 ### 1) Run a detection demo
 
@@ -42,7 +42,7 @@ High-level workflow:
 - create `BayesianCUSUMDetector(model0, model1, h)`
 - call `detector.run(samples=x_monitor)` or step-by-step with `detector.step(x)`
 
-## Demonstration / results
+## **Demonstration / results*
 
 To quickly see what the project produces, check the JSON outputs in `examples/results/`.
 You will find two kinds of files: **calibration** files (e.g. `calibrate_*.json`) and **detection** files (e.g. `detection_*.json`).
