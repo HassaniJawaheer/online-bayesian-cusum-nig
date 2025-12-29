@@ -1,0 +1,53 @@
+# Online Bayesian CUSUM (Normal–Inverse-Gamma)
+
+A Python project for **online regime-change detection** in a Gaussian stream.
+It uses a **Bayesian CUSUM** score built from **predictive log-likelihoods** under a **Normal–Inverse-Gamma (NIG)** conjugate model.
+The repo also includes a **Gaussian changepoint simulator** and a **threshold calibration** script (ARL0-based).
+
+## Quick start
+
+### 1) Run a detection demo
+
+This demo:
+- simulates a stream with a random changepoint
+- runs the detector on the rest of the stream
+- writes results to `examples/results/detection_<timestamp>.json`
+
+### 2) Calibrate the threshold (ARL0)
+
+Before running detection on real data, you usually want a threshold `h` that controls false alarms.
+
+The calibration script:
+- targets a given `ARL0` (average run length under no change)
+- simulates nominal runs
+- searches `h` until the estimated ARL0 is close to the target
+- writes results to `examples/results/calibrate_<timestamp>.json`
+
+## How to use it on your own stream
+
+This repo is written like a small module, but it is still project-style code.
+The detector itself does **not** require the simulator.
+
+What you need in practice:
+1. Your stream `x_t` (a list/array of floats)
+2. A warm-up segment you trust as nominal (to fit `M0`)
+3. A detector configured with:
+   - nominal model `M0` (trained on warm-up, then kept fixed)
+   - post-change model `M1` (resettable prior state)
+   - threshold `h` (calibrated or chosen)
+
+High-level workflow:
+- create `model0` (NIG prior), update it with warm-up data, then keep it fixed
+- create `model1` (NIG prior), reset it at the start
+- create `BayesianCUSUMDetector(model0, model1, h)`
+- call `detector.run(samples=x_monitor)` or step-by-step with `detector.step(x)`
+
+## Demonstration / results
+
+To quickly see what the project produces, check the JSON outputs in `examples/results/`.
+You will find two kinds of files: **calibration** files (e.g. `calibrate_*.json`) and **detection** files (e.g. `detection_*.json`).
+
+Calibration files include the timestamp, the calibration settings (target ARL0, number of runs, limits, etc.), and the final threshold found (`h_star`) with the estimated ARL0.
+
+Detection files include the simulator settings, the NIG model settings for `M0` and `M1`, the threshold used, and the detection outputs (including the first alert index and optional logs).
+
