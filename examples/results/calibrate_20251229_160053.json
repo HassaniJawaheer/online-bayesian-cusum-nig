@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-12-29T16:00:53",
+  "target_arl0": 50,
+  "tol_arlo": 2.0,
+  "T_max": 150,
+  "n_runs": 50,
+  "seed": 0,
+  "h_min": 0.5,
+  "h_max": 10.0,
+  "max_iter": 15,
+  "factor": 2.0,
+  "h_star": 1.6875,
+  "arl0_est": 48.36
+}
