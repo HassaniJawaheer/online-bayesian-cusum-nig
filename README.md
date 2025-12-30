@@ -4,16 +4,42 @@ A Python project for **online regime-change detection** in a Gaussian stream.
 It uses a **Bayesian CUSUM** score built from **predictive log-likelihoods** under a **Normal–Inverse-Gamma (NIG)** conjugate model.
 The repo also includes a **Gaussian changepoint simulator** and a **threshold calibration** script (ARL0-based).
 
+## **Setup**
+
+### **Create and activate a virtual environment**
+
+```bash
+# from the project root
+python -m venv .venv
+
+# Linux / macOS
+source .venv/bin/activate
+
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+```
+
+### Install dependencies:
+
+```bash
+pip install -U pip
+pip install -r requirements.txt
+```
+
 ## **Quick start**
 
-### 1) **Run a detection demo**
+### **Run a detection demo**
 
 This demo:
 - simulates a stream with a random changepoint
 - runs the detector on the rest of the stream
 - writes results to `examples/results/detection_<timestamp>.json`
 
-### 2) **Calibrate the threshold (ARL0)**
+```bash
+PYTHONPATH=. python3 main.py
+```
+
+### **Calibrate the threshold (ARL0)**
 
 Before running detection on real data, you usually want a threshold `h` that controls false alarms.
 
@@ -22,6 +48,10 @@ The calibration script:
 - simulates nominal runs
 - searches `h` until the estimated ARL0 is close to the target
 - writes results to `examples/results/calibrate_<timestamp>.json`
+
+```bash
+PYTHONPATH=. python3 examples/calibrates_threshold.py
+```
 
 ## **How to use it on your own stream**
 
