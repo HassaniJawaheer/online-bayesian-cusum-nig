@@ -75,7 +75,7 @@ High-level workflow:
 ## **Demonstration / results**
 
 To quickly see what the project produces, check the JSON outputs in `examples/results/`.
-You will find two kinds of files: **calibration** files (e.g. `calibrate_*.json`) and **detection** files (e.g. `detection_*.json`).
+You will find two kinds of files: **calibration** files (`calibrate_*.json`) and **detection** files (`detection_*.json`).
 
 Calibration files include the timestamp, the calibration settings (target ARL0, number of runs, limits, etc.), and the final threshold found (`h_star`) with the estimated ARL0.
 
